@@ -583,8 +583,27 @@ function shiftArray(arr, n) {
  *   sortDigitNamesByNumericOrder([ 'nine','eight','nine','eight' ]) => [ 'eight','eight','nine','nine']
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  if (!Array.isArray(arr)) {
+    throw new Error('Invalid input. Expected an array.');
+  }
+
+  const digitNamesOrder = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+
+  return arr.slice().sort((a, b) => {
+    return digitNamesOrder.indexOf(a) - digitNamesOrder.indexOf(b);
+  });
 }
 
 /**
@@ -606,8 +625,23 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  if (!Array.isArray(arr)) {
+    throw new Error('Invalid input. Expected an array.');
+  }
+
+  const len = arr.length;
+  if (len <= 1) {
+    // Якщо масив має один або менше елементів, повертаємо його без змін.
+    return arr.slice();
+  }
+
+  const middleIndex = Math.floor(len / 2);
+  const head = arr.slice(0, middleIndex);
+  const tail = arr.slice(len % 2 === 0 ? middleIndex : middleIndex + 1);
+
+  // Переставляємо голову та хвіст місцями.
+  return tail.concat(arr.slice(middleIndex, len - middleIndex), head);
 }
 
 module.exports = {
